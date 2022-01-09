@@ -9,7 +9,7 @@ This repository contains a PyTorch implementation of the paper:
 [Kaiyi Zhang](https://kaiyizhang.github.io/),
 [Ximing Yang](https://symenyang.github.io/),
 Yuan Wu,
-[Cheng Jin](https://cs.fudan.edu.cn/3f/b7/c25893a278455/page.htm/)
+[Cheng Jin](https://faculty.fudan.edu.cn/jc/zh_CN/index.htm)
 <br>
 AAAI 2022
 

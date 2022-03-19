@@ -88,7 +88,7 @@ class Network(nn.Module):
         return [x]
 
 
-class Runner(nn.Module):
+class Runner:
     def __init__(self, opt):
         super(Runner, self).__init__()
         self.opt = opt

@@ -44,7 +44,7 @@ class Discriminator(nn.Module):
         return d_logit  # B*1
 
 
-class Runner(nn.Module):
+class Runner:
     def __init__(self, opt):
         super(Runner, self).__init__()
         self.opt = opt

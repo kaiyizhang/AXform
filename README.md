@@ -4,7 +4,7 @@
 
 This repository contains a PyTorch implementation of the paper:
 
-[Attention-based Transformation from Latent Features to Point Clouds](https://arxiv.org/abs/2112.05324)
+[Attention-based Transformation from Latent Features to Point Clouds](https://ojs.aaai.org/index.php/AAAI/article/view/20238)
 <br>
 [Kaiyi Zhang](https://kaiyizhang.github.io/),
 [Ximing Yang](https://symenyang.github.io/),
@@ -95,11 +95,15 @@ Here we recommend using [Mitsuba 2](https://www.mitsuba-renderer.org/) for visua
 
 Please cite our work if you find it useful:
 ```latex
-@article{zhang2021axform,
- title={Attention-based Transformation from Latent Features to Point Clouds},
- author={Zhang, Kaiyi and Yang, Ximing, and Wu, Yuan and Jin, Cheng},
- journal={arXiv preprint arXiv:2112.05324},
- year={2021}
+@article{Zhang_Yang_Wu_Jin_2022,
+	author = {Zhang, Kaiyi and Yang, Ximing and Wu, Yuan and Jin, Cheng},
+	journal = {Proceedings of the AAAI Conference on Artificial Intelligence},
+	month = {Jun.},
+	number = {3},
+	pages = {3291-3299},
+	title = {Attention-Based Transformation from Latent Features to Point Clouds},
+	volume = {36},
+	year = {2022}
 }
 ```
 

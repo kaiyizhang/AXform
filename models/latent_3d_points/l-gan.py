@@ -78,6 +78,18 @@ class Runner:
         z = torch.normal(mean=0.0, std=0.2, size=(B, 128)).float().to(self.opt.device)
         latent_ref = self.autoencoder.module.encoder(ref)
 
+        # update D netwwork
+        self.latent_gen = self.generator(z)
+        real_out = self.discriminator(latent_ref)
+        fake_out = self.discriminator(self.latent_gen.detach())
+        self.loss_D_real = -torch.mean(real_out)
+        self.loss_D_fake = torch.mean(fake_out)
+        self.loss_D_gp = self.loss_gp(self.discriminator, latent_ref, self.latent_gen.detach())
+        self.loss_D = self.loss_D_real + self.loss_D_fake + self.loss_D_gp
+        self.optimizerD.zero_grad()
+        self.loss_D.backward()
+        self.optimizerD.step()
+        
         # update G network
         if args[1] % 5 - 1 == 0:
             self.latent_gen = self.generator(z)
@@ -86,17 +98,6 @@ class Runner:
             self.optimizerG.zero_grad()
             self.loss_G.backward()
             self.optimizerG.step()
-
-        # update D netwwork
-        real_out = self.discriminator(latent_ref)
-        fake_out = self.discriminator(self.latent_gen.detach())
-        self.loss_D_real = -torch.mean(real_out)
-        self.loss_D_fake = torch.mean(fake_out)
-        self.loss_D_gp = self.loss_gp(self.discriminator, latent_ref, self.latent_gen.detach())
-        self.loss_D = self.loss_D_real + self.loss_D_fake + self.loss_D_gp
-        self.optimizerD.zero_grad()
-        self.loss_D.backward(retain_graph=True)
-        self.optimizerD.step()
 
         recon = self.autoencoder.module.decoder(latent_ref)
         gen = self.autoencoder.module.decoder(self.latent_gen)

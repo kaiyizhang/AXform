@@ -100,15 +100,8 @@ class Runner:
         B, N, _ = ref.shape
         z = torch.normal(mean=0.0, std=0.2, size=(B, 128)).float().to(self.opt.device)
 
-        # update G network
-        if args[1] % 5 - 1 == 0:  # if r-gan uses vanilla gan, annotate this
-            self.gen = self.generator(z)
-            fake_out = self.discriminator(self.gen)
-            self.loss_G = -torch.mean(fake_out)  # if r-gan uses vanilla gan, -> LSGAN
-            self.loss_G.backward()
-            self.optimizerG.step()
-
         # update D netwwork
+        self.gen = self.generator(z)
         real_out = self.discriminator(ref)
         fake_out = self.discriminator(self.gen.detach())
         self.loss_D_real = -torch.mean(real_out)
@@ -116,8 +109,16 @@ class Runner:
         self.loss_D_gp = self.loss_gp(self.discriminator, ref, self.gen.detach())
         self.loss_D = self.loss_D_real + self.loss_D_fake + self.loss_D_gp
         self.optimizerD.zero_grad()
-        self.loss_D.backward(retain_graph=True)
+        self.loss_D.backward()
         self.optimizerD.step()
+
+        # update G network
+        if args[1] % 5 - 1 == 0:  # if r-gan uses vanilla gan, annotate this
+            self.gen = self.generator(z)
+            fake_out = self.discriminator(self.gen)
+            self.loss_G = -torch.mean(fake_out)  # if r-gan uses vanilla gan, -> LSGAN
+            self.loss_G.backward()
+            self.optimizerG.step()
 
         end = time.time()
         if args[1] % 10 == 0:

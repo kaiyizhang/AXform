@@ -6,7 +6,7 @@ This repository contains a PyTorch implementation of the paper:
 
 [Attention-based Transformation from Latent Features to Point Clouds](https://ojs.aaai.org/index.php/AAAI/article/view/20238)
 <br>
-[Kaiyi Zhang](https://kaiyizhang.github.io/),
+[Kaiyi Zhang](https://scholar.google.com/citations?user=2F1aJh4AAAAJ&hl=zh-CN),
 [Ximing Yang](https://symenyang.github.io/),
 Yuan Wu,
 [Cheng Jin](https://faculty.fudan.edu.cn/jc/zh_CN/index.htm)
